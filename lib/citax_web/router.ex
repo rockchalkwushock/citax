@@ -14,10 +14,13 @@ defmodule AppWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", AppWeb do
-    pipe_through :browser
+  live_session(:public, on_mount: AppWeb.Live.InitAssigns) do
+    scope("/", AppWeb) do
+      pipe_through :browser
 
-    live "/", PageLive
+      live "/", PageLive
+      live "/:event_type_slug", EventTypeLive
+    end
   end
 
   # Other scopes may use custom stacks.

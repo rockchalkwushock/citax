@@ -8,6 +8,11 @@
 import Config
 
 config :citax,
+  owner: %{
+    name: "rockchalkwushock"
+  }
+
+config :citax,
   namespace: App,
   ecto_repos: [App.Repo]
 
