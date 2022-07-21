@@ -14,6 +14,14 @@ defmodule App do
     to: App.TimeSlots,
     as: :build
 
+  defdelegate clone_event_type(event_type),
+    to: App.EventType.Repo,
+    as: :clone
+
+  defdelegate delete_event_type(event_type),
+    to: App.EventType.Repo,
+    as: :delete
+
   defdelegate get_event_by_id(id),
     to: App.Event.Repo,
     as: :get
