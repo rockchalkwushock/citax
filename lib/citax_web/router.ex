@@ -1,6 +1,8 @@
 defmodule AppWeb.Router do
   use AppWeb, :router
 
+  import Plug.BasicAuth
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -12,6 +14,19 @@ defmodule AppWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+  end
+
+  pipeline :auth do
+    plug :basic_auth, Application.compile_env(:citax, :basic_auth)
+  end
+
+  live_session(:private, on_mount: {AppWeb.Live.InitAssigns, :private}) do
+    scope("/admin", AppWeb.Admin) do
+      pipe_through :browser
+      pipe_through :auth
+
+      live "/", EventTypesLive
+    end
   end
 
   live_session(:public, on_mount: AppWeb.Live.InitAssigns) do

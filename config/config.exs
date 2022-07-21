@@ -8,6 +8,7 @@
 import Config
 
 config :citax,
+  basic_auth: [username: "admin", password: "admin"],
   owner: %{
     day_end: 17, # 1700
     day_start: 9, # 0900

@@ -17,6 +17,19 @@ defmodule AppWeb do
   and import those modules here.
   """
 
+  def admin_live_view do
+    quote do
+      use Phoenix.LiveView,
+        layout: {AppWeb.LayoutView, "admin.html"}
+
+      import AppWeb.LiveViewHelpers
+
+      alias Phoenix.LiveView
+
+      unquote(view_helpers())
+    end
+  end
+
   def controller do
     quote do
       use Phoenix.Controller, namespace: AppWeb
