@@ -18,6 +18,10 @@ defmodule App do
     to: App.Event.Repo,
     as: :get
 
+  defdelegate get_event_type_by_id(id),
+    to: App.EventType.Repo,
+    as: :get
+
   defdelegate get_event_type_by_slug(slug),
     to: App.EventType.Repo,
     as: :get_by_slug
@@ -25,4 +29,12 @@ defmodule App do
   defdelegate insert_event(params),
     to: App.Event.Repo,
     as: :insert
+
+  defdelegate insert_event_type(params),
+    to: App.EventType.Repo,
+    as: :insert
+
+  defdelegate update_event_type(event_type, params),
+    to: App.EventType.Repo,
+    as: :update
 end
