@@ -32,7 +32,7 @@ defmodule GlobalSetup do
   def seed_db do
     IO.puts("----------------------------")
     IO.puts("Scrubbing EvenType Table")
-    Repo.delete(EventType)
+    Repo.delete_all(EventType)
     IO.puts("----------------------------")
     IO.puts("Seeding database...")
     for event_type <- @event_types do
