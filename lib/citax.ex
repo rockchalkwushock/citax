@@ -6,5 +6,11 @@ defmodule App do
   Contexts are also responsible for managing your data, regardless
   if it comes from the database, an external API or others.
   """
-  defdelegate available_event_types, to: App.EventType.Repo, as: :available
+  defdelegate available_event_types,
+    to: App.EventType.Repo,
+    as: :available
+
+  defdelegate get_event_type_by_slug(slug),
+    to: App.EventType.Repo,
+    as: :get_by_slug
 end

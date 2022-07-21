@@ -9,7 +9,8 @@ import Config
 
 config :citax,
   owner: %{
-    name: "rockchalkwushock"
+    name: "rockchalkwushock",
+    time_zone: "America/Bogota"
   }
 
 config :citax,
