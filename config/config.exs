@@ -9,6 +9,8 @@ import Config
 
 config :citax,
   owner: %{
+    day_end: 17, # 1700
+    day_start: 9, # 0900
     name: "rockchalkwushock",
     time_zone: "America/Bogota"
   }

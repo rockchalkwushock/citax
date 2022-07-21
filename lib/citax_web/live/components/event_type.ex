@@ -2,6 +2,7 @@ defmodule AppWeb.Components.EventType do
   use Phoenix.Component
 
   import AppWeb.LiveViewHelpers
+  alias AppWeb.Router.Helpers, as: Routes
 
   alias __MODULE__
 
@@ -98,6 +99,38 @@ defmodule AppWeb.Components.EventType do
         <h3 class="font-bold text-gray-900"><%= @event_type.name %></h3>
         <div class="ml-auto text-xl"><i class="fas fa-caret-right"></i></div>
       </div>
+    <% end %>
+    """
+  end
+
+  def time_slot(
+        %{
+          socket: socket,
+          event_type: event_type,
+          time_slot: time_slot,
+          time_zone: time_zone
+        } = assigns
+      ) do
+    text =
+      time_slot
+      |> DateTime.shift_zone!(time_zone)
+      |> Timex.format!("{h24}:{m}")
+
+    slot_string = DateTime.to_iso8601(time_slot)
+
+    schedule_path =
+      socket
+      |> Routes.live_path(AppWeb.ScheduleEventLive, event_type.slug, slot_string)
+      |> URI.decode()
+
+    assigns =
+      assigns
+      |> assign(text: text)
+      |> assign(schedule_path: schedule_path)
+
+    ~H"""
+    <%= live_redirect to: @schedule_path, class: "text-center block w-full p-4 mb-2 font-bold text-blue-600 border border-blue-300 rounded-md hover:border-blue-600" do %>
+      <%= @text %>
     <% end %>
     """
   end
